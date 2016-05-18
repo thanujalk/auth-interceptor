@@ -68,7 +68,7 @@ public class AuthInterceptor implements Interceptor {
             return false;
         }
 
-        return  true;
+        return true;
     }
 
     @Override
