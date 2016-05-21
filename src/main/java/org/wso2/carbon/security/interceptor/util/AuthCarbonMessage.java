@@ -18,6 +18,7 @@ package org.wso2.carbon.security.interceptor.util;
 
 
 import org.wso2.carbon.messaging.CarbonMessage;
+import org.wso2.msf4j.Request;
 
 import java.nio.ByteBuffer;
 
@@ -26,12 +27,18 @@ import java.nio.ByteBuffer;
  */
 public class AuthCarbonMessage extends CarbonMessage {
 
-    /**
-     * Set message body
-     *
-     * @param body message body
-     */
-    public void setMessageBody (ByteBuffer body) {
-        messageBody.add(body);
+    private Request request;
+
+    public AuthCarbonMessage(Request request) {
+        this.request = request;
+    }
+
+    @Override
+    public String getHeader(String key) {
+        return this.request.getHeader(key);
+    }
+
+    public ByteBuffer getMessageBody() {
+        return this.request.getMessageBody();
     }
 }

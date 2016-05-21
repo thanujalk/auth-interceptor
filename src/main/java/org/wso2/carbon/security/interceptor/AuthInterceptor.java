@@ -19,8 +19,7 @@ package org.wso2.carbon.security.interceptor;
 import org.osgi.service.component.annotations.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.wso2.carbon.messaging.CarbonMessage;
-import org.wso2.carbon.security.caas.jaas.ProxyCallbackHandler;
+import org.wso2.carbon.security.caas.api.ProxyCallbackHandler;
 import org.wso2.carbon.security.interceptor.util.AuthCarbonMessage;
 import org.wso2.carbon.security.interceptor.util.Constants;
 import org.wso2.msf4j.Interceptor;
@@ -47,7 +46,7 @@ public class AuthInterceptor implements Interceptor {
     @Override
     public boolean preCall(Request request, Response response, ServiceMethodInfo serviceMethodInfo) throws Exception {
 
-        CallbackHandler callbackHandler = new ProxyCallbackHandler(getCarbonMessage(request));
+        CallbackHandler callbackHandler = new ProxyCallbackHandler(new AuthCarbonMessage(request));
 
         LoginContext loginContext;
         try {
@@ -83,14 +82,6 @@ public class AuthInterceptor implements Interceptor {
     private void sendInternalServerError(Response response) {
         response.setStatus(500);
     }
-
-    private CarbonMessage getCarbonMessage(Request request) {
-        AuthCarbonMessage carbonMessage = new AuthCarbonMessage();
-        carbonMessage.setHeaders(request.getHeaders());
-        carbonMessage.setMessageBody(request.getMessageBody());
-        return carbonMessage;
-    }
-
 
 //
 //        //TODO: Authorization also handled in this interceptor since we can't decide order of execution for

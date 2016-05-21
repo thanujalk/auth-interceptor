@@ -54,7 +54,7 @@
             org.slf4j.*;version="${slf4j.logging.package.import.version.range}",
             org.wso2.msf4j.*;version="${org.wso2.msf4j.version.range}",
             org.osgi.service.component.annotations.*;version="${org.osgi.service.component.annotations.version.range}",
-            org.wso2.carbon.security.caas.jaas.*;version="${org.wso2.carbon.security.caas.version.range}",
+            org.wso2.carbon.security.caas.api.*;version="${org.wso2.carbon.security.caas.version.range}",
             org.wso2.carbon.messaging.*;version="${org.wso2.carbon.messaging.version.range}",
             javax.security.auth.*
         </import.package>
